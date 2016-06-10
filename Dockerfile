@@ -1,17 +1,17 @@
-FROM resin/rpi-raspbian:jessie
+FROM armv7/armhf-ubuntu:wily
 
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install -y wget
-RUN apt-get install apt-utils
-RUN apt-get install build-essential g++
-RUN apt-get install openssl
-RUN apt-get install cmake
-RUN apt-get install libssl-dev
-RUN apt-get install libc-ares-dev
-RUN apt-get install uuid-dev
-RUN apt-get install daemon
-RUN apt-get install make
+RUN apt-get install -y apt-utils
+RUN apt-get install -y openssl \
+		       make \
+		       build-essential \
+		       g++ \
+		       cmake \
+                       libssl-dev \
+                       libc-ares-dev \
+                       uuid-dev \
+                       daemon 
 COPY libwebsockets /libwebsockets
 RUN cd /libwebsockets && cmake .
 RUN cd /libwebsockets && make install
